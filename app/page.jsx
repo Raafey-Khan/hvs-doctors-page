@@ -1,11 +1,73 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+
+import { useEffect } from 'react';
+
+const MyComponent = () => {
+  useEffect(() => {
+    const smoothScroll = (e) => {
+      e.preventDefault();
+      const targetId = e.currentTarget.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => link.addEventListener('click', smoothScroll));
+
+    return () => {
+      links.forEach(link => link.removeEventListener('click', smoothScroll));
+    };
+  }, []);
+
+return (
+    <div className="tab-content">
+      <Link href="#about-section" passHref legacyBehavior>
+        <a className="tab-1 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
+          <p className="text-[15px] font-[500]">About</p>
+        </a>
+      </Link>
+      <Link href="#credentials-section" passHref legacyBehavior>
+        <a className="tab-2 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
+          <p className="text-[15px] font-[500]">Credentials</p>
+        </a>
+      </Link>
+      <Link href="#Condition-&-Treatment-section" passHref legacyBehavior>
+        <a className="tab-3 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
+          <p className="text-[15px] font-[500]">Condition & Treatment</p>
+        </a>
+      </Link>
+      <Link href="#Locations-section" passHref legacyBehavior>
+        <a className="tab-4 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
+          <p className="text-[15px] font-[500]">Locations</p>
+        </a>
+      </Link>
+      <Link href="#publications-section" passHref legacyBehavior>
+        <a className="tab-5 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
+          <p className="text-[15px] font-[500]">Publications</p>
+        </a>
+      </Link>
+      <Link href="#Associations-&-Memberships-section" passHref legacyBehavior>
+        <a className="tab-6 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
+          <p className="text-[15px] font-[500]">Associations & Memberships</p>
+        </a>
+      </Link>
+    </div>
+);
+}
 
 export default function Home() {
+
+
   return (
  <>
  <main className="bg-[#f6f6f6]">
-  <div className="bread-cum h-[61px] bg-[#EEEEEE] w-full flex justify-start p-4 px-6 gap-6">
+  <section className="bread-cum-section">
+    <div className="container">
+    <div className="bread-cum h-[61px] bg-[#EEEEEE] w-full flex justify-start p-4 px-6 gap-6">
     <div className="bread-cum-home-img">
     <img src="images/house.png" alt="" />
       
@@ -30,82 +92,71 @@ export default function Home() {
 
     
   </div>
-
-  <div className="Banner-section w-full h-[473px] bg-[url('../public/images/bg-banner.png')] bg-no-repeat bg-center bg-cover flex px-14">
-
-  <div className="Banner-Content-text basis-[50%] flex flex-col justify-center ml-6  h-full w-full text-[#0A5E65]">
-    <div className="Bannner-header-text mb-2">
-      <h2 className=" text-[40px] uppercase font-[600]">Dr shawn mendes</h2>
     </div>
+  </section>
+ 
+  <section className="Banner-section">
+    <div className="Container">
+    <div className="Banner-section w-full h-[473px] bg-[url('../public/images/bg-banner.png')] bg-no-repeat bg-center bg-cover flex px-14">
 
-    <div className="Banner-about-text text-[18px] font-[400]  mb-4 ">
-    Staff Physician, Cardiovascular Medicine, Heart,
-    <span className="block">
-    Vascular & Thoracic Insitute
-    </span>
+<div className="Banner-Content-text basis-[50%] flex flex-col justify-center ml-6  h-full w-full text-[#0A5E65]">
+  <div className="Bannner-header-text mb-2">
+    <h2 className=" text-[40px] uppercase font-[600]">Dr shawn mendes</h2>
+  </div>
+
+  <div className="Banner-about-text text-[18px] font-[400]  mb-4 ">
+  Staff Physician, Cardiovascular Medicine, Heart,
+  <span className="block">
+  Vascular & Thoracic Insitute
+  </span>
+  </div>
+
+  <div className="Language-selection-inner mb-4 flex gap-6 w-fit  justify-center items-center">
+    <div>
+    <h4 className="text-[18px] font-[600]">Languges: </h4>
     </div>
-
-    <div className="Language-selection-container mb-4 flex gap-6 w-fit  justify-center items-center">
-      <div>
-      <h4 className="text-[18px] font-[600]">Languges: </h4>
-      </div>
-      <div className="flex gap-2">
-      <span className="text-[14px] font-[700] bg-white px-6 rounded-lg py-1">English</span>
-      <span className="text-[14px] font-[700] bg-white px-6 rounded-lg py-1">Spanish</span>
-      </div>
-    </div>
-
-    <div className="Appointment-container flex w-fit items-center mb-10">
-      <h3 className="font-[600] text-[18px]">By Appointment: </h3>
-      <span className=" ml-2 font-[400] text-[17px]">Monday, </span>
-      <span className="font-[400] text-[17px]">Thursday & </span>
-      <span className="font-[400] text-[17px]">Saturday</span>
-    </div>
-
-    <div className="Banner-buttons-container flex gap-4">
-      <button className="border border-gray-700 w-[217px] h-[50px] rounded-3xl font-[600]">
-        Request an Appointment
-      </button>
-
-      <button className="w-[217px] h-[50px] bg-white rounded-3xl flex justify-center items-center">
-        <img src="images/btn-img.png" alt="" />
-      </button>
+    <div className="flex gap-2">
+    <span className="text-[14px] font-[700] bg-white px-6 rounded-lg py-1">English</span>
+    <span className="text-[14px] font-[700] bg-white px-6 rounded-lg py-1">Spanish</span>
     </div>
   </div>
 
-  <div className="Banner-img basis-[50%]  h-ful w-full">
-    <img className=" h-full" src="images/doctor-banner-img.png" alt="" />
-  </div>
+  <div className="Appointment flex w-fit items-center mb-10">
+    <h3 className="font-[600] text-[18px]">By Appointment: </h3>
+    <span className=" ml-2 font-[400] text-[17px]">Monday, </span>
+    <span className="font-[400] text-[17px]">Thursday & </span>
+    <span className="font-[400] text-[17px]">Saturday</span>
   </div>
 
+  <div className="Banner-buttons flex gap-4">
+    <button className="border border-gray-700 w-[217px] h-[50px] rounded-3xl font-[600]">
+      Request an Appointment
+    </button>
 
-  <div className="tabs-and-aboutme-section flex mx-auto px-8 mt-14 gap-10  ">
-  <div className="tabs basis-[20%] h-full w-full sticky  top-8">
-  <div className="tab-content ">
-    <div className="tab-1 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
-      <p className="text-[15px] font-[500]">About</p>
-    </div>
-    <div className="tab-2 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
-      <p className="text-[15px] font-[500]">Credentials </p>
-    </div>
-    <div className="tab-3 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
-      <p className="text-[15px] font-[500]">Condition & Treatment</p>
-    </div>
-    <div className="tab-4 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
-      <p className="text-[15px] font-[500]">Locations</p>
-    </div>
-    <div className="tab-5 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
-      <p className="text-[15px] font-[500]">Publications</p>
-    </div>
-    <div className="tab-6 bg-white w-[267px] h-[52px] flex justify-center items-center mb-3">
-      <p className="text-[15px] font-[500]">Associations & Memberships</p>
-    </div>
+    <button className="w-[217px] h-[50px] bg-white rounded-3xl flex justify-center items-center">
+      <img src="images/btn-img.png" alt="" />
+    </button>
   </div>
 </div>
 
+<div className="Banner-img basis-[50%]  h-ful w-full">
+  <img className=" h-full" src="images/doctor-banner-img.png" alt="" />
+</div>
+</div>
+    </div>
+  </section>
+  
 
-   <div className="About-me-container h-full basis-[80%] ">
-    <h2 className=" font-[600] text-[24px] text-[#363636] mb-4">
+<div className="tabs-and-aboutme-section flex mx-auto px-8 mt-14 gap-10">
+          <div className="tabs basis-[20%] h-full w-full sticky  top-8">
+            <MyComponent />
+          </div>
+
+
+   <section className="About-me h-full basis-[80%] ">
+    <section id="about-section" className="about-section">
+      <div className="container">
+      <h2 className=" font-[600] text-[24px] text-[#363636] mb-4">
       About me
     </h2>
 
@@ -113,21 +164,26 @@ export default function Home() {
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
 
-    <div className="About-container-video mb-4">
+    <div className="About-video mb-4">
     <img src="images/video-img.png" alt="" />
     </div>
+      </div>
+    </section>
+   
 
-    <h2 className=" font-[600] text-[24px] text-[#363636] mb-4">
+   
+     <section id="credentials-section" className="credentials-section">
+      <div className="container">
+      <h2 className=" font-[600] text-[24px] text-[#363636] mt-2 mb-4">
       Credentils
       </h2>
-      
-    <p className="mb-4">
+      <p className="mb-4">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
     <p className="mb-6">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
-    
+
     <h2 className=" font-[600] text-[24px] text-[#363636] mb-4">
       Table of Content
       </h2>
@@ -152,12 +208,20 @@ export default function Home() {
           <p className="bg-[#E9E9E9] h-[60px] flex justify-center items-center">Lorem Ipsum Dolor</p>
         </div>
       </div>
-
-      <h2 className=" font-[600] text-[24px] text-[#363636] mb-4">
+      </div>
+     </section>
+    
+      
+    
+    
+   
+      <section id="Condition-&-Treatment-section" className="conditions-treatment-section">
+        <div className="container">
+        <h2 className=" font-[600] text-[24px] text-[#363636] mb-4">
       Content & Treatment
       </h2>
 
-      <div className="Content-Treatment-container h-full  w-[823px] border-b-none border-2 p-5">
+      <div className="Content-Treatment h-full  w-[823px] border-b-none border-2 p-5">
       <h2 className=" font-[600] text-[24px] text-[#363636]">
       Conditions
       </h2>
@@ -208,15 +272,21 @@ export default function Home() {
       <div className=" w-[823px]   border-2 h-14 flex justify-center items-center">
       <p >View All Conditions and Treatment</p>
       </div>
+        </div>
+      </section>
+      
 
-      <div className="location-container mb-2 p-4">
+      
+     <section id="Locations-section" className="location-section">
+      <div className="container">
+      <div className="location mb-2 p-4">
       <h2 className=" font-[600] text-[24px] text-[#363636] ">
       Locations
       </h2>
 
 
 
-    <div className="location-flex-container h-full flex  items-center gap-12 ">
+    <div className="location-flex h-full flex  items-center gap-12 ">
       <div className="h-full ">
       <div class="h-[286px]   overflow-hidden w-[300px]  rounded-xl">
   <iframe
@@ -279,12 +349,15 @@ export default function Home() {
 
   
       </div>
+      </div>
+     </section>
+      
       
 
       
 
 
-   </div>
+   </section>
   </div>
  </main>
  </>
